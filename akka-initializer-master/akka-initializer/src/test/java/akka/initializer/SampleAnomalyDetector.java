@@ -56,11 +56,11 @@ public class SampleAnomalyDetector extends PersistenceActor {
 
         if (message instanceof SampleDelayEvent) {
 
-            store(message, this::handleDelay);
+            store((SampleDelayEvent) message, this::handleDelay);
 
         } else if (message instanceof SampleCancelEvent) {
 
-            store(message, this::handleCancel);
+            store((SampleCancelEvent) message, this::handleCancel);
 
         } else if (message instanceof SampleAnomalyEvent) {
 
@@ -74,7 +74,7 @@ public class SampleAnomalyDetector extends PersistenceActor {
 
         sampleAnomalyState.addDelayEvent(sampleDelayEvent);
 
-        LOGGER.info(sampleAnomalyState.toString());
+        log.info(sampleAnomalyState.toString());
 
         if (!sampleAnomalyState.isAnomalyCheckScheduled()) {
 
@@ -95,7 +95,7 @@ public class SampleAnomalyDetector extends PersistenceActor {
 
     private void handleAnomaly(Message message) {
 
-        LOGGER.info(sampleAnomalyState.toString());
+        log.info(sampleAnomalyState.toString());
 
         // sampleAnomalyState.hasAnomaly() method checks if there was a cancel event between delays events.
         if (sampleAnomalyState.hasAnomaly()) {

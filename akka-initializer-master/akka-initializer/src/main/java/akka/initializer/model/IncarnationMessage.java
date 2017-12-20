@@ -18,8 +18,6 @@ public class IncarnationMessage extends DefaultMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "IncarnationMessage{" +
-                super.toString() +
-                '}';
+        return "IncarnationMessage {" + super.toString() + "}";
     }
 }

@@ -23,8 +23,6 @@ public class HeartBeatMessage extends DefaultMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "HeartBeatMessage{" +
-                super.toString() +
-                "}";
+        return "HeartBeatMessage {" + super.toString() + "}";
     }
 }

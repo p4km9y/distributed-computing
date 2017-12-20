@@ -14,12 +14,13 @@ public class SpringActorProducer implements IndirectActorProducer {
     private final String actorBeanName;
     private final Parameters parameters;
 
-    public SpringActorProducer(ApplicationContext applicationContext,
-                               String actorBeanName, Parameters parameters) {
+
+    public SpringActorProducer(ApplicationContext applicationContext, String actorBeanName, Parameters parameters) {
         this.applicationContext = applicationContext;
         this.actorBeanName = actorBeanName;
         this.parameters = parameters;
     }
+
 
     @Override
     public Actor produce() {
@@ -28,6 +29,7 @@ public class SpringActorProducer implements IndirectActorProducer {
         return setParametersIfPresent(actor);
 
     }
+
 
     private Actor setParametersIfPresent(Actor actor) {
 
@@ -48,6 +50,7 @@ public class SpringActorProducer implements IndirectActorProducer {
 
         return actor;
     }
+
 
     @Override
     @SuppressWarnings("unchecked")

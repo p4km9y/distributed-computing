@@ -1,12 +1,19 @@
 package akka.initializer;
 
-import akka.actor.ActorRef;
-import akka.initializer.model.*;
-import org.springframework.context.ApplicationContext;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import org.springframework.context.ApplicationContext;
+
+import akka.actor.ActorRef;
+import akka.initializer.model.DefaultMessage;
+import akka.initializer.model.Message;
+import akka.initializer.model.MessageExpiry;
+import akka.initializer.model.MessageExpiryListener;
+import akka.initializer.model.Parameters;
+import akka.initializer.model.ResponseMessage;
+import akka.initializer.model.Time;
 
 /**
  * Helps to test message expiry implementation.
@@ -35,7 +42,7 @@ public class MessageExpiryDetector extends PersistenceActor implements MessageEx
 
         if (message instanceof MessageExpiryEvent) {
 
-            store(message, this::handleMessageExpiryEvent);
+            store((MessageExpiryEvent) message, this::handleMessageExpiryEvent);
 
             acknowledge();
 

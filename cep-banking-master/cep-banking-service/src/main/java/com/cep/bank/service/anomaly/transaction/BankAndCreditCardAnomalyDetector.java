@@ -31,13 +31,13 @@ public class BankAndCreditCardAnomalyDetector extends PersistenceActor {
 
     @Override
     public String persistenceId() {
-        return getSelf().path().parent() + "-" + getSelf().path().name();
+        return self().path().parent() + "-" + self().path().name();
     }
 
     @Override
     public void handleReceiveRecover(Message cepMessage) {
 
-        LOGGER.info("Receive recover {} state: {}", this, state);
+        log.info("Receive recover {} state: {}", this, state);
 
         if (cepMessage instanceof CustomerTransactionEvent) {
 
@@ -48,7 +48,7 @@ public class BankAndCreditCardAnomalyDetector extends PersistenceActor {
             sendGenericEvent((GenericEvent) cepMessage);
 
         }
-        LOGGER.info("Complete recover of a message. state {}", state);
+        log.info("Complete recover of a message. state {}", state);
 
     }
 
@@ -56,15 +56,15 @@ public class BankAndCreditCardAnomalyDetector extends PersistenceActor {
     @Override
     public void handleReceiveCommand(Message cepMessage) {
 
-        LOGGER.info("Receive command {} state: {}", this, state);
+        log.info("Receive command {} state: {}", this, state);
 
         if (cepMessage instanceof CustomerTransactionEvent) {
 
-            store(cepMessage, this::sendCustomerTransactionEvent);
+            store((CustomerTransactionEvent) cepMessage, this::sendCustomerTransactionEvent);
 
         } else if (cepMessage instanceof GenericEvent) {
 
-            store(cepMessage, this::sendGenericEvent);
+            store((GenericEvent)cepMessage, this::sendGenericEvent);
 
         }
 

@@ -6,3 +6,5 @@
 target
 *.log
 *application-server.yaml
+.settings/
+.classpath
